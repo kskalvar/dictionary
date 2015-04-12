@@ -12,9 +12,15 @@
 </div>
 
 <script>
-var app = angular('weather', []);
+var app = angular.module('weather', []);
 app.controller('weatherController', function($scope, $http) {
-	$scope.formData = {};
+	$scope.formData = 	{reqday: 'E',
+						 stnid: 'n/a',
+						 prior: 'N',
+						 qcname: 'VER2',
+						 VARVALUE: '13743201504',
+						 which: 'ASCII Download (Daily Summ.) (10B)',
+						 reqday: ''};
 	$scope.appData = 'Empty';
 	$http.post('http://cdo.ncdc.noaa.gov/qclcd/QCLCD', $scope.formData)
 	.success(function(response){
