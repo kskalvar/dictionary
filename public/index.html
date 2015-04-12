@@ -1,25 +1,24 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="sample_app">
 
 <head>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
 </head>
 
-<body>
-
-<div ng-app="myApp" ng-controller="customersCtrl">
+<body ng-controller="sampleController">
 	<p>Filter records: <input type="text" ng-model="inputFilter"></p>
+	{{data}}
 	<table>
-		<tr ng-repeat="i in records | filter: inputFilter | orderBy: 'Country'">
-			<td>{{i.Name}}</td><td>{{i.City}}</td><td>{{i.Country}}</td>
+		<tr ng-repeat="i in data | filter: inputFilter | orderBy: 'name'">
+			<td>{{i._id}}</td><td>{{i.name}}</td>
 		</tr>
 	</table>
-</div>
 
-<script src="personController.js"></script>
+<script src=",/core.js"></script>
 <style>
 body {
 	font-family: sans-serif;
+	background-color: palegoldenrod;
 }
 table, th, td {
 	border: 1px solid grey;
@@ -27,10 +26,10 @@ table, th, td {
 	padding: 5px;
 }
 table tr:nth-child(odd) {
-	background-color: #f1f1f1;
+	background-color: cornsilk;
 }
 table tr:nth-child(even) {
-	background-color: #ffffff;
+	background-color: white;
 }
 </style>
 </body>
