@@ -22,11 +22,43 @@ var atrbSchema = mongoose.Schema({
 	name: String
 });
 
+var dictionarySchema = mongoose.Schema({
+	id_atrb: Number,
+	id_atrb_vrsn: Number,
+	dt_eff: Number,
+	dt_exptn: Number,
+	name_data_type: String,
+	name_atrb: String,
+	cd_atrb_type: Number,
+	name_atrb_dsply: String,
+	name_ety: String,
+	cd_atrb_sts: Number,
+	cd_atrb_src: Number,
+	int_rtrd_atrb: Boolean,
+	id_lst_updt: Number,
+	id_lst_updt_usr: String,
+	id_create_usr: String,
+	dttm_create: Number
+});
+
 var atrb = mongoose.model('sample', atrbSchema, "sample");
+
+var dictionaryModel = mongoose.model('dictionary', dictionarySchema, "atrb_mtdt");
 
 app.get('/api/sample', function(req, res) {
 	var query = atrb.find();
 	query.exec(function(err, row) {
+		if(err) {
+			res.send(err);
+		} else {
+			res.json(row);
+		}
+	});
+});
+
+app.get('/api/dictionary', function(req, res) {
+	var query = dictionaryModel.find();
+		query.exec(function(err, row) {
 		if(err) {
 			res.send(err);
 		} else {

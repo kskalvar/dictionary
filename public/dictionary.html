@@ -11,8 +11,8 @@
 <body>
 	<div ng-controller="dictionaryController">
 		<table>
-			<tr ng-repeat="">
-				
+			<tr ng-repeat="i in appData">
+				<td>{{i.id_atrb}}</td><td>{{i.name_atrb_dsply}}</td><td>{{i.id_create_usr}}</td><td>{{i.dttm_create}}</td>
 			</tr>
 		</table>
 	</div>
