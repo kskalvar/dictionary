@@ -9,8 +9,9 @@
 
 <div ng-app="sampleApp" ng-controller="sampleCtrl">
 	<p>Filter records: <input type="text" ng-model="inputFilter"></p>
-	<form>
-	<p>Insert record: <input type="text" ng-model="formData.name"><button ng-click="createSample()" type="submit">Submit</button></p>
+	<form name="insertForm" novalidate>
+	<p><span ng-show="insertForm.name.$error.required">Value required!</span></p>
+	<p>Insert record: <input name="name" type="text" ng-model="formData.name" required><button ng-click="createSample()" type="submit">Submit</button></p>
 	</form>
 	<table>
 		<tr ng-repeat="i in sampleData | filter: inputFilter | orderBy: '_id'">
