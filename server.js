@@ -58,60 +58,26 @@ var get = function(req, callback) {
 		return;
 	}
 	var pathname = url.parse(req.url).pathname;
-	var seen = false;
 	for(i in putMap) {
 		if(putMap[i] === pathname) {
-			callback();
 			return;
 		}
 	}
+	callback();
 }
 
-
-//app.get('/api/dictionary', function(req, res) {
-//	var query = dictionaryModel.find();
-//	query.exec(function(err, row) {
-//		if(err) {
-//			res.send(err);
-//		} else {
-//			res.json(row);
-//		}
-//	});
-//});
+var wow = function(err, result) {
+	console.log(JSON.stringify(result));
+	body = JSON.stringify(result);
+};
 
 httpd.createServer(function(request, response) {
-	put("/api/");
-	if(url.parse(request.url).pathname === '/api/printputMap'){
-		response.writeHeader(200, {"Content-type": "text/html"});
-		response.write("<ul>");
-		for(i in putMap) {
-			response.write("<li>" + putMap[i] + "</li>");
-		}
-		response.write("</ul>");
-		response.end();
-		return;
-	}
+	put("/api/dictionary/");
 	get(request, function() {
-		console.log("api hit");
+		var query = dictionaryModel.find();
+		query.exec(wow(err, result));
 	});
-	
-	response.writeHeader(200, {"Content-type": "text/html"});
-	response.write("Simple NodeJS HTTP Server");
-	response.write("<p>HEADERS<ul>");
-	parse(request.headers, function(k, v) {
-		if(k !== '') {
-			response.write("<li>" + k + " : " + v + "</li>");
-		}
-	});
-	response.write("</ul>");
-	response.write("<p>Method: " + request.method + " " + request.url + "<p>");
-	response.write("<p>URL<ul>");
-	parse(url.parse(request.url), function(k, v) {
-		if(k !== '' && v !== null) { 	
-			response.write("<li>" + k + " : " + v + "</li>");
-		}
-	});
-	response.write("</ul>");
+	response.writeHead(200, {"Content-type": "text/html"});
 	response.end();
 	console.log("Connection closed");
 	

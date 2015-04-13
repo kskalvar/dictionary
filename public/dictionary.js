@@ -4,8 +4,10 @@ app.controller('dictionaryController', function($scope, $http) {
 	$scope.date = new Date();
 	$("title").html($scope.date);
 	$scope.appData = '';
+	
 	$http.get('/api/dictionary')
 	.success(function(response) {
 		$scope.appData = response;
 	});
+	
 });
