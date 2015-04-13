@@ -1,8 +1,33 @@
 var sys = require("sys");
 var url = require("url");
 var httpd = require("http");
+var mongoose = require('mongoose');
+
+mongoose.connect('mongodb://localhost/dict');
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function(callback) {console.log("connection success");});
 
 var putMap = [];
+var dictionarySchema = mongoose.Schema({
+	id_atrb: Number,
+	id_atrb_vrsn: Number,
+	dt_eff: Number,
+	dt_exptn: Number,
+	name_data_type: String,
+	name_atrb: String,
+	cd_atrb_type: Number,
+	name_atrb_dsply: String,
+	name_ety: String,
+	cd_atrb_sts: Number,
+	cd_atrb_src: Number,
+	int_rtrd_atrb: Boolean,
+	id_lst_updt: Number,
+	id_lst_updt_usr: String,
+	id_create_usr: String,
+	dttm_create: Number
+});
+var dictionaryModel = mongoose.model('dictionary', dictionarySchema, "atrb_mtdt");
 
 var parse = function(o, f) {
 	JSON.parse(JSON.stringify(o), f);
@@ -42,6 +67,18 @@ var get = function(req, callback) {
 	}
 }
 
+
+//app.get('/api/dictionary', function(req, res) {
+//	var query = dictionaryModel.find();
+//	query.exec(function(err, row) {
+//		if(err) {
+//			res.send(err);
+//		} else {
+//			res.json(row);
+//		}
+//	});
+//});
+
 httpd.createServer(function(request, response) {
 	put("/api/");
 	if(url.parse(request.url).pathname === '/api/printputMap'){
@@ -57,6 +94,7 @@ httpd.createServer(function(request, response) {
 	get(request, function() {
 		console.log("api hit");
 	});
+	
 	response.writeHeader(200, {"Content-type": "text/html"});
 	response.write("Simple NodeJS HTTP Server");
 	response.write("<p>HEADERS<ul>");
