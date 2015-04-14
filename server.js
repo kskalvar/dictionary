@@ -66,18 +66,27 @@ var get = function(req, callback) {
 	callback();
 }
 
-var wow = function(err, result) {
-	console.log(JSON.stringify(result));
-	body = JSON.stringify(result);
-};
-
 httpd.createServer(function(request, response) {
 	put("/api/dictionary/");
-	get(request, function() {
-		var query = dictionaryModel.find();
-		query.exec(wow(err, result));
+	var body = '';
+	if(request.method === 'GET') {
+		var pathname = url.parse(request.url).pathname;
+		for(i in putMap) {
+			if(putMap[i] == pathname) {
+				var query = dictionaryModel.find();
+				query.exec(function(err, result) {
+					if(err) {
+						body += "DB Error";
+					} else {
+						body = JSON.stringify(result);
+					}
+				});
+			}
+		}
+	}
 	});
 	response.writeHead(200, {"Content-type": "text/html"});
+	response.write(body);
 	response.end();
 	console.log("Connection closed");
 	
