@@ -1,3 +1,4 @@
+/*jslint browser: false, devel: true, node: true, passfail: true */
 var sys = require("sys");
 var url = require("url");
 var httpd = require("http");
@@ -6,7 +7,7 @@ var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/dict');
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function(callback) {console.log("connection success");});
+db.once('open', function (callback) {console.log("connection success");});
 
 var putMap = [];
 var dictionarySchema = mongoose.Schema({
@@ -29,11 +30,11 @@ var dictionarySchema = mongoose.Schema({
 });
 var dictionaryModel = mongoose.model('dictionary', dictionarySchema, "atrb_mtdt");
 
-var parse = function(o, f) {
+var parse = function (o, f) {
 	JSON.parse(JSON.stringify(o), f);
 };
 
-var put = function(url) {
+var put = function (url) {
 	if(typeof url !== 'string') {
 		console.log("Invalid get request");
 		return;
@@ -53,7 +54,7 @@ var put = function(url) {
 	}
 }
 
-var get = function(req, callback) {
+var get = function (req, callback) {
 	if(req.method !== 'GET') {
 		return;
 	}
@@ -66,26 +67,13 @@ var get = function(req, callback) {
 	callback();
 }
 
-httpd.createServer(function(request, response) {
+httpd.createServer(function (request, response) {
 	put("/api/dictionary/");
-	var body = '';
-	if(request.method === 'GET') {
-		var pathname = url.parse(request.url).pathname;
-		for(i in putMap) {
-			if(putMap[i] == pathname) {
-				var query = dictionaryModel.find();
-				query.exec(function(err, result) {
-					if(err) {
-						body += "DB Error";
-					} else {
-						body = JSON.stringify(result);
-					}
-				});
-			}
-		}
+	var body = 'Clean';
+	if(url.parse(request.url).pathname === 'GET') {
+		console.log('HELLO');
 	}
-	});
-	response.writeHead(200, {"Content-type": "text/html"});
+	response.writeHead(200, {"Content-type": "text/html", "Content-length": body.length});
 	response.write(body);
 	response.end();
 	console.log("Connection closed");
