@@ -7,8 +7,8 @@ var methodOverride = require('method-override');
 
 mongoose.connect('mongodb://localhost/dict');
 var db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function(callback) {console.log("connection success");});
+db.on('error', console.error.bind(console, 'DB connection error'));
+db.once('open', function(callback) {console.log("DB connection success");});
 
 app.use(express.static(__dirname + '/public'));
 app.use(morgan('dev'));
