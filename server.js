@@ -18,34 +18,14 @@ app.use(bodyParser.json({type: 'application/vnd.api+json'}));
 app.use(methodOverride());
 
 var atrbSchema = mongoose.Schema({
-	_id: Number,
-	name: String
+	name: String,
+	comment: String,
+	date: Date
 });
 
-var dictionarySchema = mongoose.Schema({
-	id_atrb: Number,
-	id_atrb_vrsn: Number,
-	dt_eff: Number,
-	dt_exptn: Number,
-	name_data_type: String,
-	name_atrb: String,
-	cd_atrb_type: Number,
-	name_atrb_dsply: String,
-	name_ety: String,
-	cd_atrb_sts: Number,
-	cd_atrb_src: Number,
-	int_rtrd_atrb: Boolean,
-	id_lst_updt: Number,
-	id_lst_updt_usr: String,
-	id_create_usr: String,
-	dttm_create: Number
-});
+var atrb = mongoose.model('atrb', atrbSchema, "atrb");
 
-var atrb = mongoose.model('sample', atrbSchema, "sample");
-
-var dictionaryModel = mongoose.model('dictionary', dictionarySchema, "atrb_mtdt");
-
-app.get('/api/sample', function(req, res) {
+app.get('/api/atrb', function(req, res) {
 	var query = atrb.find();
 	query.exec(function(err, row) {
 		if(err) {
@@ -56,18 +36,7 @@ app.get('/api/sample', function(req, res) {
 	});
 });
 
-app.get('/api/dictionary', function(req, res) {
-	var query = dictionaryModel.find();
-		query.exec(function(err, row) {
-		if(err) {
-			res.send(err);
-		} else {
-			res.json(row);
-		}
-	});
-});
-
-app.post('/api/sample', function(req, res) {
+app.post('/api/atrb', function(req, res) {
 	atrb.create({
 			_id: req.body._id,
 			name: req.body.name,
@@ -87,7 +56,7 @@ app.post('/api/sample', function(req, res) {
 	});
 });
 
-app.delete('/api/sample/:dictRowId', function(req, res) {
+app.delete('/api/atrb/:id', function(req, res) {
 	atrb.remove({
 		_id : req.params.dictRowId,
 	}, function(err, row) {
