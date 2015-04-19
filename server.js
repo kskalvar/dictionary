@@ -58,7 +58,7 @@ app.post('/api/atrb', function(req, res) {
 
 app.delete('/api/atrb/:id', function(req, res) {
 	atrb.remove({
-		_id : req.params.dictRowId,
+		_id : req.params.id,
 	}, function(err, row) {
 		if(err) {
 			res.send(err);

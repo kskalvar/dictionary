@@ -2,30 +2,20 @@
 <html ng-app="dictionary">
 
 <head>
-	<title></title>
-	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
-	<script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
-	<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
-
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+	<title>{{appData}}</title>
 </head>
-
 <body>
 	<div ng-controller="dictionaryController">
-		<table class="table table-striped table-condensed">
-			<thead><td>ID</td><td>Name</td><td>User</td><td>Date</td></thead>
+		<table>
+			<thead><td>ID</td><td>Name</td><td>User</td><td>Date</td><td>Actions</td></thead>
 			<tr ng-repeat="i in appData">
-				<td>{{i._id}}</td><td>{{i.name}}</td><td>{{i.comment}}</td><td>{{i.date | date:'yyyy-MM-dd HH:mm:ss Z'}}</td>
+				<td>{{i._id}}</td><td>{{i.name}}</td><td>{{i.comment}}</td><td>{{i.date | date:'yyyy-MM-dd HH:mm:ss Z'}}</td><td><a ng-click="deleteRecord(i._id)" href="">Delete</a></td>
 			</tr>
 		</table>
 	</div>
 </body>
-
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+<script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
 <script src="atrb.js"></script>
-
+<link rel="stylesheet" href="atrb.css">
 </html>
