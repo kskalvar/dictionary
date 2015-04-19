@@ -4,6 +4,7 @@ var mongoose = require('mongoose');
 var morgan = require('morgan');
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
+var fs = require('fs');
 
 mongoose.connect('mongodb://localhost/dict');
 var db = mongoose.connection;
@@ -24,6 +25,16 @@ var atrbSchema = mongoose.Schema({
 });
 
 var atrb = mongoose.model('atrb', atrbSchema, "atrb");
+
+app.get('/api/boobs', function(req, res) {
+	fs.readFile('./public/_gif_1426267896304.gif', function(err, data) {
+		if(err) {
+			throw(err);
+		} else {
+			res.json(data);
+		}
+	});
+});
 
 app.get('/api/atrb', function(req, res) {
 	var query = atrb.find();
