@@ -7,10 +7,16 @@
 <body>
 	<div ng-controller="dictionaryController">
 		<table>
-			<thead><td>ID</td><td>Name</td><td>User</td><td>Date</td><td>Actions</td></thead>
+			<thead><td>ID</td><td>Name</td><td>User</td><td>Date</td><td>Action</td></thead>
 			<tr ng-repeat="i in appData">
-				<td>{{i._id}}</td><td>{{i.name}}</td><td>{{i.comment}}</td><td>{{i.date | date:'MM/dd/yyyy @ h:mma'}}</td><td><a ng-click="deleteRecord(i._id)" href="">Delete</a></td>
+				<td>{{i._id}}</td><td>{{i.name}}</td><td>{{i.comment}}</td><td>{{i.date | date:'medium'}}</td><td><a ng-click="deleteRecord(i._id)" href="">Delete</a></td>
 			</tr>
+		</table>
+		<table class="insertTable">
+			<thead><td>Name</td><td>Comment</td><td>Date</td><td>Action</td></thead>
+			<form novalidate>
+				<td><input type="text" name="name" ng-model="name"/></td><td><input type="text" name="comment" ng-model="comment"/></td><td><input name="date" type="text" ng-model="date"/></td><td><a ng-click="insertRecord()" href="">Insert</a></td>
+			</form>
 		</table>
 	</div>
 </body>

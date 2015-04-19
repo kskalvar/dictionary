@@ -11,7 +11,7 @@ app.controller('dictionaryController', function($scope, $http) {
 		});
 	}
 	$scope.insertRecord = function() {
-		$scope.date = new Date();
+	$scope.date = new Date();
 		$http.post('api/atrb/', {name:$scope.name, comment: $scope.comment, date: $scope.date})
 		.success(function(response) {
 			console.log($scope.name)

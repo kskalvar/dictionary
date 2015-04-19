@@ -37,6 +37,7 @@ app.get('/api/atrb', function(req, res) {
 });
 
 app.post('/api/atrb', function(req, res) {
+	console.log(req.body);
 	atrb.create({
 			name: req.body.name,
 			comment: req.body.comment,

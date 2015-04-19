@@ -8,7 +8,7 @@ table {
 	margin-right: auto;
 	background-color: white;
 	border-radius: 3px;
-	width: 75%
+	width: auto
 }
 
 thead td {
@@ -24,4 +24,9 @@ tr:nth-child(odd) {
 td {
 	padding: 3px;
 	text-align: center
+}
+
+.insertTable {
+	border-top-right-radius: 0px;
+	border-top-left-radius: 0px;
 }
