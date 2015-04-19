@@ -9,7 +9,7 @@
 		<table>
 			<thead><td>ID</td><td>Name</td><td>User</td><td>Date</td><td>Actions</td></thead>
 			<tr ng-repeat="i in appData">
-				<td>{{i._id}}</td><td>{{i.name}}</td><td>{{i.comment}}</td><td>{{i.date | date:'medium'}}</td><td><a ng-click="deleteRecord(i._id)" href="">Delete</a></td>
+				<td>{{i._id}}</td><td>{{i.name}}</td><td>{{i.comment}}</td><td>{{i.date | date:'MM/dd/yyyy @ h:mma'}}</td><td><a ng-click="deleteRecord(i._id)" href="">Delete</a></td>
 			</tr>
 		</table>
 	</div>

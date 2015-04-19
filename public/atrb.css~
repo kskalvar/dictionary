@@ -15,6 +15,7 @@ thead td {
 	font-weight: bold;
 	text-align: center;
 	background-color: white;
+	text-align: center
 }
 
 tr:nth-child(odd) {
@@ -23,5 +24,4 @@ tr:nth-child(odd) {
 
 td {
 	padding: 3px;
-	text-align: center
 }
