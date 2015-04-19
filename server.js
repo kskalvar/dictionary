@@ -18,6 +18,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.json({type: 'application/vnd.api+json'}));
 app.use(methodOverride());
 
+var errorHandle = function errorHandler(err, req, res, next) {
+	  res.status(500);
+	  res.render('error', { error: err });
+}
+
 var atrbSchema = mongoose.Schema({
 	name: String,
 	comment: String,
@@ -73,6 +78,7 @@ app.delete('/api/atrb/:id', function(req, res) {
 		_id : req.params.id,
 	}, function(err, row) {
 		if(err) {
+			res.status(500);
 			res.send(err);
 		} else {
 			atrb.find(function(err, newRow) {
@@ -86,8 +92,13 @@ app.delete('/api/atrb/:id', function(req, res) {
 	});
 });
 
-app.get("*", function(req, res) {
-	res.sendfile('./public/index.html');
+app.get("*", function(err, req, res, next) {
+	if(err) {
+		res.status(500);
+		res.send('500))');
+	} else {
+		res.sendfile('./public/index.html');
+	}
 });
 
 app.listen(80);
