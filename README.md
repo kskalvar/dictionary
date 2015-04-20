@@ -14,7 +14,7 @@ Setup for Windows
 Deploy
 <ul>
   <li>In command prompt run "mongod" (MongoDB Server), if "mongod" not in system path navigate to install directory to run and make sure "C:\data\db" exists<li>
-  <li>Git pull the master branch of this repo to some easy to access directory, please do not overwrite any of the master files. Perhaps make a personal branch?<li>
+  <li>Git pull the master branch of this repo to some easy to access directory, please do not overwrite any of the master files. Perhaps make a personal branch?</li>
   <li>In command prompt navigate to the new git pull location's top most directory, this directory should have a package.json file in it</li>
   <li>In command prompt run command "npm install" (this installs any local library dependencies, specified in package.json, express and mongoose will be redundantly installed locally but don't worry about it)</li>
   <li>In command prompt run command "node server.js" to start and deploy your express application server</li>
