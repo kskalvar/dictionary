@@ -6,7 +6,9 @@ var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 var fs = require('fs');
 
-mongoose.connect('mongodb://localhost/dict');
+// ksk mongoose.connect('mongodb://localhost/dict');
+mongoose.connect('mongodb://mongo/dict');
+
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'DB connection error'));
 db.once('open', function(callback) {console.log("DB connection success");});
@@ -91,5 +93,7 @@ app.get("*", function(err, req, res, next) {
 	}
 });
 
-app.listen(80);
-console.log("App listening on port 80");
+// ksk app.listen(80);
+// ksk console.log("App listening on port 80");
+app.listen(3000);
+console.log("App listening on port 3000");
