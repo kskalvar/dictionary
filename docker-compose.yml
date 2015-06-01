@@ -1,0 +1,13 @@
+node:
+  build: .
+  working_dir: /code/mean
+  command: bash -c "npm install && node server"
+  volumes:
+   - /c/Users/kskalvar/git/dictionary/:/code/mean
+  ports:
+   - 3000:3000
+  links:
+   - mongo:mongo
+mongo:
+   image: mongo
+
